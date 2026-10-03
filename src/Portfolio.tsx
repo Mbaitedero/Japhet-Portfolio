@@ -77,6 +77,7 @@ function scrollToSection(id: string, closeMenu: () => void) {
 function Portfolio() {
   const [darkMode, setDarkMode] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('accueil')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [filter, setFilter] = useState<'Tous' | ProjectCategory>('Tous')
   const [copied, setCopied] = useState(false)
@@ -95,7 +96,14 @@ function Portfolio() {
   }, [menuOpen, selectedProject])
 
   useEffect(() => {
-    const handleScroll = () => setShowFloatingContact(window.scrollY > window.innerHeight * 0.75)
+    const handleScroll = () => {
+      setShowFloatingContact(window.scrollY > window.innerHeight * 0.75)
+      const sections = Array.from(document.querySelectorAll<HTMLElement>('main section[id]'))
+      const currentSection = sections.reduce((current, section) => {
+        return section.getBoundingClientRect().top <= 120 ? section.id : current
+      }, 'accueil')
+      setActiveSection(currentSection)
+    }
     const handleKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setSelectedProject(null)
@@ -169,14 +177,19 @@ function Portfolio() {
     <div className="portfolio">
       <nav className="navbar" aria-label="Navigation principale">
         <div className="nav-container">
-          <button className="brand" onClick={() => scrollToSection('accueil', closeMenu)} aria-label="Retour à l'accueil">
+          <button className="brand" onClick={() => { setActiveSection('accueil'); scrollToSection('accueil', closeMenu) }} aria-label="Retour à l'accueil">
             <span className="brand-mark">JA</span>
             <span className="brand-name">Japhet<span>.</span></span>
           </button>
           <div className={`nav-menu ${menuOpen ? 'is-open' : ''}`}>
             <div className="nav-links">
               {navigation.map((item) => (
-                <button key={item.id} onClick={() => scrollToSection(item.id, closeMenu)} className="nav-link">
+                <button
+                  key={item.id}
+                  onClick={() => { setActiveSection(item.id); scrollToSection(item.id, closeMenu) }}
+                  className={`nav-link ${activeSection === item.id ? 'is-active' : ''}`}
+                  aria-current={activeSection === item.id ? 'page' : undefined}
+                >
                   {item.label}
                 </button>
               ))}
@@ -258,7 +271,7 @@ function Portfolio() {
 
       <footer className="footer"><div className="container footer-inner"><div className="brand footer-brand"><span className="brand-mark">JA</span><span className="brand-name">Japhet<span>.</span></span></div><p>Data Engineering · ML / MLOps · BI</p><span>© {new Date().getFullYear()} Japhet Allah-N'diguim</span></div></footer>
 
-      <AnimatePresence>{showFloatingContact && <motion.button className="floating-contact" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} onClick={() => scrollToSection('contact', closeMenu)}><Mail size={17} /> Me contacter</motion.button>}</AnimatePresence>
+      <AnimatePresence>{showFloatingContact && !menuOpen && <motion.button className="floating-contact" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} onClick={() => scrollToSection('contact', closeMenu)}><Mail size={17} /> Me contacter</motion.button>}</AnimatePresence>
 
       <AnimatePresence>{selectedProject && <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)}><motion.div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-title" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }} onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer"><X size={21} /></button><span className="section-kicker">{selectedProject.category}</span><h2 id="project-title">{selectedProject.title}</h2><p className="modal-description">{selectedProject.details}</p><div className="modal-results">{selectedProject.results.map((result) => <strong key={result}>{result}</strong>)}</div><h3>Architecture</h3><div className="architecture">{selectedProject.architecture.map((step, index) => <span key={step}><b>{String(index + 1).padStart(2, '0')}</b>{step}{index < selectedProject.architecture.length - 1 && <ArrowDown size={15} />}</span>)}</div><h3>Technologies</h3><div className="tag-list">{selectedProject.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div>{selectedProject.github && <a className="modal-github" href={selectedProject.github} target="_blank" rel="noreferrer"><Github size={17} /> Voir le projet sur GitHub <ExternalLink size={15} /></a>}</motion.div></motion.div>}</AnimatePresence>
     </div>
