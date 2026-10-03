@@ -50,8 +50,8 @@ export const profile = {
   experience: [
     {
       title: 'Pipeline Data & BI bancaire — Reporting réglementaire et détection de fraude',
-      organization: 'Projet de Fin d’Année · ENSA Fès',
-      date: '2025 — 2026',
+      organization: 'ABISOFT',
+      date: 'Juil. — Août 2026',
       featured: true,
       bullets: [
         'Architecture Medallion sur Databricks : ingestion, feature engineering avancé et modélisation en étoile.',
@@ -88,7 +88,7 @@ export const profile = {
       description: 'Plateforme de données pour le reporting réglementaire et la détection de fraude.',
       results: ['AUC ROC 0,983', 'Rappel 87,6 %', '13 tâches Airflow'],
       technologies: ['Databricks', 'Airflow', 'MLflow', 'Power BI'],
-      details: 'Projet de Fin d’Année réunissant architecture Medallion sur Databricks, orchestration Airflow, modèle HistGradientBoosting, suivi MLflow champion / challenger, APIs de service et tableaux de bord réglementaires.',
+      details: 'Stage chez ABISOFT réunissant architecture Medallion sur Databricks, orchestration Airflow, modèle HistGradientBoosting, suivi MLflow champion / challenger, APIs de service et tableaux de bord réglementaires.',
       architecture: ['Bronze', 'Silver', 'Gold', 'ML', 'Dashboard'],
     },
     {
