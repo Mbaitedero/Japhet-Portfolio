@@ -121,7 +121,5 @@ export const profile = {
 }
 
 export const cvFiles = [
-  { label: 'Data Engineer', path: '/cv/CV_Japhet_ALLAH-NDIGUIM_Data-Engineer.pdf' },
-  { label: 'Data Scientist', path: '/cv/CV_Japhet_ALLAH-NDIGUIM_Data-Scientist.pdf' },
-  { label: 'Data Analyst', path: '/cv/CV_Japhet_ALLAH-NDIGUIM_Data-Analyst.docx' },
+  { label: 'Télécharger CV', path: '/CV_Japhet_ALLAH-NDIGUIM_.pdf' },
 ]

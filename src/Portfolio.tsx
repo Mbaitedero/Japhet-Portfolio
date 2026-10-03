@@ -6,7 +6,6 @@ import {
   BarChart3,
   BriefcaseBusiness,
   Check,
-  ChevronDown,
   CircleDot,
   Clipboard,
   Code2,
@@ -78,7 +77,6 @@ function scrollToSection(id: string, closeMenu: () => void) {
 function Portfolio() {
   const [darkMode, setDarkMode] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [cvOpen, setCvOpen] = useState(false)
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [filter, setFilter] = useState<'Tous' | ProjectCategory>('Tous')
   const [copied, setCopied] = useState(false)
@@ -102,7 +100,6 @@ function Portfolio() {
       if (event.key === 'Escape') {
         setSelectedProject(null)
         setMenuOpen(false)
-        setCvOpen(false)
       }
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -185,16 +182,9 @@ function Portfolio() {
               ))}
             </div>
             <div className="nav-actions">
-              <div className="cv-picker">
-                <button className="button button-small button-outline" onClick={() => setCvOpen(!cvOpen)} aria-expanded={cvOpen}>
-                  <Download size={16} /> Télécharger CV <ChevronDown size={15} />
-                </button>
-                {cvOpen && (
-                  <div className="cv-dropdown">
-                    {cvFiles.map((cv) => <a key={cv.label} href={cv.path} download>{cv.label}<Download size={15} /></a>)}
-                  </div>
-                )}
-              </div>
+              <a className="button button-small button-outline" href={cvFiles[0].path} download>
+                <Download size={16} /> Télécharger CV
+              </a>
               <button className="theme-button" onClick={() => setDarkMode(!darkMode)} aria-label={darkMode ? 'Activer le thème clair' : 'Activer le thème sombre'}>
                 {darkMode ? <Sun size={18} /> : <Moon size={18} />}
               </button>
