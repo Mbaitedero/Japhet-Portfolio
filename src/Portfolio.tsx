@@ -195,7 +195,7 @@ function Portfolio() {
               ))}
             </div>
             <div className="nav-actions">
-              <a className="button button-small button-outline" href={cvFiles[0].path} download>
+              <a className="button button-small button-outline" href={cvFiles[1].path} download>
                 <Download size={16} /> Télécharger CV
               </a>
               <button className="theme-button" onClick={() => setDarkMode(!darkMode)} aria-label={darkMode ? 'Activer le thème clair' : 'Activer le thème sombre'}>
