@@ -74,6 +74,12 @@ function scrollToSection(id: string, closeMenu: () => void) {
   closeMenu()
 }
 
+const categoryCover: Record<ProjectCategory, string> = {
+  'Data Engineering': '/projects/cover-data-engineering.svg',
+  'Machine Learning': '/projects/cover-machine-learning.svg',
+  BI: '/projects/cover-bi.svg',
+}
+
 function Portfolio() {
   const [darkMode, setDarkMode] = useState(true)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -273,7 +279,7 @@ function Portfolio() {
 
       <AnimatePresence>{showFloatingContact && !menuOpen && <motion.button className="floating-contact" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} onClick={() => scrollToSection('contact', closeMenu)}><Mail size={17} /> Me contacter</motion.button>}</AnimatePresence>
 
-      <AnimatePresence>{selectedProject && <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)}><motion.div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-title" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }} onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer"><X size={21} /></button><span className="section-kicker">{selectedProject.category}</span><h2 id="project-title">{selectedProject.title}</h2><p className="modal-description">{selectedProject.details}</p><div className="modal-results">{selectedProject.results.map((result) => <strong key={result}>{result}</strong>)}</div><h3>Architecture</h3><div className="architecture">{selectedProject.architecture.map((step, index) => <span key={step}><b>{String(index + 1).padStart(2, '0')}</b>{step}{index < selectedProject.architecture.length - 1 && <ArrowDown size={15} />}</span>)}</div><h3>Technologies</h3><div className="tag-list">{selectedProject.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div>{selectedProject.github && <a className="modal-github" href={selectedProject.github} target="_blank" rel="noreferrer"><Github size={17} /> Voir le projet sur GitHub <ExternalLink size={15} /></a>}</motion.div></motion.div>}</AnimatePresence>
+      <AnimatePresence>{selectedProject && <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setSelectedProject(null)}><motion.div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-title" initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 30, opacity: 0 }} onClick={(event) => event.stopPropagation()}><button className="modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer"><X size={21} /></button><img className="modal-cover" src={categoryCover[selectedProject.category]} alt="" /><span className="section-kicker">{selectedProject.category}</span><h2 id="project-title">{selectedProject.title}</h2><p className="modal-description">{selectedProject.details}</p><div className="modal-results">{selectedProject.results.map((result) => <strong key={result}>{result}</strong>)}</div><h3>Architecture</h3><div className="architecture">{selectedProject.architecture.map((step, index) => <span key={step}><b>{String(index + 1).padStart(2, '0')}</b>{step}{index < selectedProject.architecture.length - 1 && <ArrowDown size={15} />}</span>)}</div><h3>Technologies</h3><div className="tag-list">{selectedProject.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div>{selectedProject.github && <a className="modal-github" href={selectedProject.github} target="_blank" rel="noreferrer"><Github size={17} /> Voir le projet sur GitHub <ExternalLink size={15} /></a>}</motion.div></motion.div>}</AnimatePresence>
     </div>
   )
 }
@@ -284,7 +290,7 @@ function SkillCard({ group }: { group: SkillGroup }) {
 }
 
 function ProjectCard({ project, onOpen }: { project: Project; onOpen: () => void }) {
-  return <motion.article className={`project-card ${project.featured ? 'featured-project' : ''}`} layout onClick={onOpen} tabIndex={0} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') onOpen() }}><div className="project-card-top"><span className="project-category">{project.category}</span><ArrowUpRight size={19} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="project-results">{project.results.map((result) => <span key={result}>{result}</span>)}</div><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div>{project.github && <a className="project-github" href={project.github} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()}><Github size={15} /> GitHub</a>}<button className="project-details" onClick={(event) => { event.stopPropagation(); onOpen() }}>Voir les détails <ArrowUpRight size={15} /></button></motion.article>
+  return <motion.article className={`project-card ${project.featured ? 'featured-project' : ''}`} layout onClick={onOpen} tabIndex={0} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') onOpen() }}><img className="project-cover" src={categoryCover[project.category]} alt="" loading="lazy" /><div className="project-card-top"><span className="project-category">{project.category}</span><ArrowUpRight size={19} /></div><h3>{project.title}</h3><p>{project.description}</p><div className="project-results">{project.results.map((result) => <span key={result}>{result}</span>)}</div><div className="tag-list">{project.technologies.map((technology) => <span key={technology}>{technology}</span>)}</div>{project.github && <a className="project-github" href={project.github} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()}><Github size={15} /> GitHub</a>}<button className="project-details" onClick={(event) => { event.stopPropagation(); onOpen() }}>Voir les détails <ArrowUpRight size={15} /></button></motion.article>
 }
 
 export default Portfolio

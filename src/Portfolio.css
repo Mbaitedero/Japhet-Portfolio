@@ -361,6 +361,10 @@ input, textarea { font-family: inherit; font-size: 16px; }
   transition: all 0.2s; outline: none;
 }
 .project-card:hover, .project-card:focus-visible { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
+.project-cover {
+  width: calc(100% + 48px); height: 150px; object-fit: cover; display: block;
+  margin: -24px -24px 0; border-radius: 21px 21px 0 0;
+}
 .featured-project { grid-column: 1 / -1; }
 @media (min-width: 768px) { .featured-project { grid-column: span 2; } }
 @media (min-width: 1100px) { .featured-project { grid-column: span 3; } }
@@ -388,6 +392,11 @@ input, textarea { font-family: inherit; font-size: 16px; }
   background: var(--bg-elevated); color: var(--text-secondary); z-index: 2;
 }
 .modal-close:hover { color: var(--accent); border-color: var(--accent); }
+.modal-cover {
+  width: calc(100% + 48px); height: 190px; object-fit: cover; display: block;
+  margin: -28px -24px 20px; border-radius: 21px 21px 0 0;
+}
+@media (min-width: 768px) { .modal-cover { width: calc(100% + 72px); margin: -36px -36px 24px; } }
 .project-modal h2 { font-size: 22px; font-weight: 700; margin: 10px 0 14px; line-height: 1.25; }
 .modal-description { font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px; }
 .modal-results { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
