@@ -214,7 +214,7 @@ function Portfolio() {
           <div className="network-background" aria-hidden="true"><span /><span /><span /><span /><span /></div>
           <div className="hero-grid container">
             <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-              <div className="eyebrow"><span className="status-dot" /> Disponible pour stage PFE / premier emploi</div>
+              <div className="eyebrow"><span className="status-dot" /> Ouvert aux opportunités · PFE 2027</div>
               <h1>Des données fiables.<br /><span>Des décisions plus fortes.</span></h1>
               <p className="hero-role">{profile.role} <span>/</span> Data Science & IA</p>
               <p className="hero-tagline">{profile.tagline}</p>
