@@ -121,5 +121,5 @@ export const profile = {
 }
 
 export const cvFiles = [
-  { label: 'Télécharger CV', path: '/CV_Japhet_ALLAH-NDIGUIM_.pdf' },
+  { label: 'Télécharger CV', path: '/CV_Japhet_ALLAH-NDIGUIM_DE.pdf' },
 ]
